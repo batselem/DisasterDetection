@@ -11,7 +11,7 @@
 - flask
 
 ### Project Motivation
-In this project, I tried to categorize messages about disasters into different categories. 
+NNowadays, microblogging becomes the heart of online communications and the means for people to express their personal opinion about various things that are happening around the world. The speed of microblogging is much faster than other emergency services. That is why it is so intriguing to learn from it and use it for reporting about natural disasters. So, in this project, I tried to categorize emergency messages about disasters into different categories such as flood and earthquake and help to report disasterous events instantly.
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
@@ -27,4 +27,4 @@ In this project, I tried to categorize messages about disasters into different c
 3. Go to http://0.0.0.0:3001/
 
 ## Acknowledgements
-I'd like to thank reviews and Figure Eight for providing the dataset.
+I'd like to thank reviews from udacity and Figure Eight for providing the dataset.
