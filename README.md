@@ -1,5 +1,18 @@
 # Disaster Response Pipeline Project
 
+### Required Libraries
+
+- nltk 3.3.0
+- numpy 1.15.2
+- pandas 0.23.4
+- scikit-learn 0.20.0
+- sqlalchemy 1.3.15
+- plotly
+- flask
+
+### Project Motivation
+In this project, I tried to categorize messages about disasters into different categories. 
+
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
@@ -12,3 +25,6 @@
     `python run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+## Acknowledgements
+I'd like to thank reviews and Figure Eight for providing the dataset.
