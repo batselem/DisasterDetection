@@ -11,7 +11,7 @@
 - flask
 
 ### Project Motivation
-Nowadays, microblogging becomes the heart of online communications and the means for people to express their personal opinion about various things that are happening around the world. The speed of microblogging is much faster than other emergency services. That is why it is so intriguing to learn from it and use it for reporting about natural disasters. So, in this project, I tried to detect disasterous events instantly in real time and categorize emergency messages about disasters into different categories such as flood and earthquake.
+Nowadays, microblogging becomes the heart of online communications and the means for people to express their personal opinion about various things that are happening around the world. The speed of microblogging is much faster than other emergency services. That is why it is so intriguing to learn from it and use it for reporting on natural disasters. So, in this project, I tried to detect disasterous events instantly in real time and categorize emergency messages about disasters into different categories such as flood and earthquake.
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
