@@ -21,8 +21,18 @@ from sklearn.tree import DecisionTreeClassifier
 from sqlalchemy import create_engine
 
 
-
 def load_data(database_filepath):
+
+    """ Load data from database into dataframe.
+
+    Args:
+        database_filepath: String.
+    Returns:
+       X: numpy.ndarray. Disaster messages.
+       Y: numpy.ndarray. Disaster categories for each messages.
+       category_name: list. Disaster category names.
+    """
+
     # load data from database
     engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table('message_category', con=engine)
@@ -37,13 +47,28 @@ def load_data(database_filepath):
 url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
 
 def tokenize(text):
+
+    """Tokenize text.
+    Args:
+        text: String. A disaster message.
+    Returns:
+        list. It contains tokens.
+    """
+
+    # Parse urls
     detected_urls = re.findall(url_regex, text)
     for url in detected_urls:
         text = text.replace(url, "urlplaceholder")
 
+    # Normalize and tokenize
     tokens = word_tokenize(text)
+
+    # Remove stopwords
+    tokens = [t for t in tokens if t not in stopwords.words('english')]
+
     lemmatizer = WordNetLemmatizer()
 
+    # Lemmatize
     clean_tokens = []
     for tok in tokens:
         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
@@ -54,6 +79,18 @@ def tokenize(text):
 
 # Get results and add them to a dataframe.
 def display_result(y_test, y_pred, category_names):
+
+    """ Load data from database into dataframe.
+
+    Args:
+        y_test: numpy.ndarray. True disaster categories.
+        y_pred: numpy.ndarray. Predicted disaster categories.
+       category_name: list. Disaster category names.
+
+    Returns:
+       results: Dataframe. F-score, precision and recall for each prediction.
+    """
+
     results = pd.DataFrame(columns=['Category', 'f_score', 'precision', 'recall'])
 
     for num, cat in enumerate(category_names):
@@ -69,24 +106,44 @@ def display_result(y_test, y_pred, category_names):
     return results
 
 def build_model():
-    
+
+    """Build model.
+    Returns: 
+        pipline: sklearn.model_selection.GridSearchCV. Random Forest Classifier.
+    """
+
+    # Set machine learning pipeline
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
     
+    # Set parameters for gird search
     parameters = {'clf__estimator__n_estimators': [20, 50]}
 
+    # Set grid search to find optimal parameters.
     cv = GridSearchCV(estimator=pipeline, param_grid=parameters)
 
     return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """Evaluate model
+    Args:
+        model: sklearn.model_selection.GridSearchCV. 
+        X_test: numpy.ndarray. Disaster messages.
+        Y_test: numpy.ndarray. Disaster categories for each messages
+        category_names: Disaster category names.
+    """
     Y_pred = model.predict(X_test)
     display_result(Y_test, Y_pred, category_names)
 
 def save_model(model, model_filepath):
+    """Save model
+    Args:
+        model: sklearn.model_selection.GridSearchCV.
+        model_filepath: String. Save the trained model as a pickle file.
+    """
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
