@@ -27,4 +27,4 @@ Nowadays, microblogging has become the heart of online communications and the me
 3. Go to http://0.0.0.0:3001/
 
 ## Acknowledgements
-I'd like to thank instructors from udacity for their reviewers and Figure Eight for providing the dataset.
+I'd like to thank instructors from Udacity for their reviewers and Figure Eight for providing the dataset.
